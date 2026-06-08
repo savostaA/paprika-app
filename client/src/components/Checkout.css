@@ -1,0 +1,157 @@
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary);
+  font-size: 0.85rem; padding: 12px 0 4px; transition: var(--transition);
+}
+.back-link:hover { color: var(--primary); }
+
+.checkout-form { display: flex; flex-direction: column; gap: 14px; padding-bottom: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  display: flex; align-items: center; gap: 6px; font-size: 0.82rem;
+  font-weight: 600; color: var(--text-secondary);
+}
+.form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238B8BA3' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.checkout-summary {
+  padding: 16px; border-radius: var(--radius-sm); margin-top: 4px;
+}
+.checkout-summary h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; }
+.checkout-item {
+  display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.82rem;
+  color: var(--text-secondary); border-bottom: 1px solid var(--border);
+}
+.checkout-total {
+  display: flex; justify-content: space-between; padding-top: 10px;
+  font-weight: 700; font-size: 1rem; color: var(--primary);
+}
+.checkout-submit { width: 100%; margin-top: 8px; padding: 14px; font-size: 1rem; }
+
+.success-card {
+  text-align: center; padding: 40px 24px; border-radius: var(--radius); margin-top: 40px;
+}
+.success-icon { color: var(--success); margin-bottom: 16px; }
+.success-card h2 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 8px; }
+.success-number { font-size: 0.9rem; color: var(--secondary); font-weight: 600; font-family: monospace; margin-bottom: 12px; }
+.success-text { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
+.success-total { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+
+/* Responsive Checkout Layout */
+@media (min-width: 768px) {
+  .checkout-form {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 32px;
+    align-items: start;
+    margin-top: 16px;
+  }
+  
+  .checkout-form-sidebar {
+    position: sticky;
+    top: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .checkout-summary {
+    margin-top: 0;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+  }
+}
+
+@media (min-width: 1024px) {
+  .checkout-form {
+    grid-template-columns: 1fr 360px;
+    gap: 40px;
+  }
+}
+
+/* Staff Calculator Styles */
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.staff-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 8px 0 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+}
+
+.staff-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.staff-card-header h4 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.staff-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.staff-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.staff-row:last-child {
+  border-bottom: none;
+}
+
+.staff-role {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.staff-icon {
+  font-size: 1.1rem;
+}
+
+.staff-count {
+  font-weight: 700;
+}
+
+.staff-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.staff-total-count {
+  color: var(--primary);
+  background: rgba(230, 57, 70, 0.08);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+

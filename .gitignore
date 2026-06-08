@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-desktop/
+*.zip
+*.apk
+.env
+.DS_Store
+build/
+bin/

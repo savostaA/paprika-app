@@ -1,0 +1,77 @@
+name: Build iOS App
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Allows manual triggering from GitHub UI
+
+jobs:
+  build-ios:
+    name: Build iOS App (Simulator)
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies (Client)
+        run: |
+          cd client
+          npm install
+
+      - name: Build Web Application
+        run: |
+          cd client
+          npm run build
+
+      - name: Sync Capacitor iOS
+        run: |
+          cd client
+          npx cap sync ios
+
+      - name: Install CocoaPods Dependencies
+        run: |
+          cd client/ios/App
+          pod install
+
+      - name: Build iOS Application (Simulator)
+        run: |
+          xcodebuild -workspace client/ios/App/App.xcworkspace \
+                     -scheme App \
+                     -sdk iphonesimulator \
+                     -configuration Debug \
+                     -derivedDataPath build \
+                     CODE_SIGNING_ALLOWED=NO
+
+      - name: Compress App Bundle
+        run: |
+          cd client/ios/App/build/Build/Products/Debug-iphonesimulator
+          zip -r ../../../../../../../PaprikaCatering-iOS-Simulator.zip App.app
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PaprikaCatering-iOS-Simulator
+          path: PaprikaCatering-iOS-Simulator.zip
+          retention-days: 7
+
+# ==============================================================================
+# NOTE: How to compile a signed .ipa for physical iPhones / App Store:
+# 
+# To build a release .ipa, Apple requires a paid Developer Account and Signing
+# Certificates. If you obtain these, you can modify this workflow:
+#
+# 1. Add your Apple Developer Certificate (.p12) and Provisioning Profile (.mobileprovision)
+#    to your GitHub Repository Secrets.
+# 2. Use a GitHub Action like 'apple-actions/import-codesign-certs@v3' to import them.
+# 3. Run xcodebuild with the '-exportArchive' flag and provisioning configurations.
+# ==============================================================================
