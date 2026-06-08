@@ -38,10 +38,14 @@ jobs:
           cd client
           npx cap sync ios
 
-      - name: Build iOS Application (Simulator)
+      - name: Install CocoaPods Dependencies
         run: |
           cd client/ios/App
-          xcodebuild -project App.xcodeproj \
+          pod install
+
+      - name: Build iOS Application (Simulator)
+        run: |
+          xcodebuild -workspace client/ios/App/App.xcworkspace \
                      -scheme App \
                      -sdk iphonesimulator \
                      -configuration Debug \
@@ -50,8 +54,8 @@ jobs:
 
       - name: Compress App Bundle
         run: |
-          cd client/ios/App/build/Build/Products/Debug-iphonesimulator
-          zip -r ../../../../../../../PaprikaCatering-iOS-Simulator.zip App.app
+          cd build/Build/Products/Debug-iphonesimulator
+          zip -r ../../../../PaprikaCatering-iOS-Simulator.zip App.app
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
