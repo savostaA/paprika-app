@@ -38,14 +38,10 @@ jobs:
           cd client
           npx cap sync ios
 
-      - name: Install CocoaPods Dependencies
-        run: |
-          cd client/ios/App
-          pod install
-
       - name: Build iOS Application (Simulator)
         run: |
-          xcodebuild -workspace client/ios/App/App.xcworkspace \
+          cd client/ios/App
+          xcodebuild -project App.xcodeproj \
                      -scheme App \
                      -sdk iphonesimulator \
                      -configuration Debug \
